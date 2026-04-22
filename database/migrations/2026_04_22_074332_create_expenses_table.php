@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('size')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('category');
+            $table->decimal('price', 15, 2)->default(0);
             $table->string('bank_account')->nullable();
             $table->text('notes')->nullable();
             $table->foreignId('created_by')->constrained('users');

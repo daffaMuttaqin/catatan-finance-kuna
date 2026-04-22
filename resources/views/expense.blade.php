@@ -19,15 +19,19 @@
 
         <input type="text" name="name" placeholder="Nama Produk" class="border p-2 rounded" required>
 
-        <input type="number" name="price" placeholder="Harga" class="border p-2 rounded" required>
+        {{-- <input type="number" name="size" placeholder="Size" class="border p-2 rounded" required> --}}
 
+        
         <input type="number" name="quantity" placeholder="Quantity" class="border p-2 rounded">
-
+        
         <select name="category" class="border p-2 rounded" required>
             <option value="">Pilih Kategori</option>
             <option>Bahan Baku</option>
             <option>Operasional</option>
         </select>
+
+        <input type="number" name="price" placeholder="Harga" class="border p-2 rounded" required>
+
 
         <input type="text" name="bank_account" placeholder="Bank (optional)" class="border p-2 rounded">
 
@@ -45,9 +49,10 @@
             <tr>
                 <th class="p-2">Tanggal</th>
                 <th class="p-2">Nama</th>
-                <th class="p-2">Size</th>
+                {{-- <th class="p-2">Size</th> --}}
                 <th class="p-2">Qty</th>
                 <th class="p-2">Kategori</th>
+                <th class="p-2">Harga</th>
                 <th class="p-2">Akun Bank</th>
                 <th class="p-2">Keterangan</th>
                 <th class="p-2">Aksi</th>
@@ -70,9 +75,9 @@ async function loadData() {
             <tr class="border-b">
                 <td class="p-2">${item.date}</td>
                 <td class="p-2">${item.name}</td>
-                <td class="p-2">${item.size}</td>
                 <td class="p-2">${item.quantity ?? 1}</td>
                 <td class="p-2">${item.category}</td>
+                <td class="p-2">${item.price}</td>
                 <td class="p-2">${item.bank_account}</td>
                 <td class="p-2">${item.notes}</td>
                 <td class="p-2">
