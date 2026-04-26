@@ -13,5 +13,9 @@ class ActivityLog extends Model
         'detail',
     ];
 
-    public $timestamps = false; // karena kita pakai created_at manual
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
+
+    public $timestamps = false;
 }
