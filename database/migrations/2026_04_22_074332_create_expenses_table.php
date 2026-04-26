@@ -16,7 +16,6 @@ return new class extends Migration
             $table->date('date');
             $table->string('name');
             $table->string('size')->nullable();
-            $table->integer('quantity')->nullable();
             $table->string('category');
             $table->decimal('price', 15, 2)->default(0);
             $table->string('bank_account')->nullable();

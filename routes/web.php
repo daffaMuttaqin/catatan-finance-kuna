@@ -19,10 +19,6 @@ Route::get('/income-page', function () {
     return view('income');
 });
 
-Route::get('/expense-page', function () {
-    return view('expense');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

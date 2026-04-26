@@ -12,19 +12,17 @@ class IncomeController extends Controller
     {
         $query = Income::query();
 
-        // Search
         if ($request->search) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // Filter tanggal
         if ($request->start_date && $request->end_date) {
             $query->whereBetween('date', [$request->start_date, $request->end_date]);
         }
 
         $incomes = $query->latest()->get();
 
-        return response()->json($incomes);
+        return view('income', compact('incomes'));
     }
 
     public function store(Request $request)
@@ -57,9 +55,10 @@ class IncomeController extends Controller
             );
         });
 
-        return response()->json(['message' => 'Income berhasil ditambahkan']);
+        return redirect()->back()->with('success', 'Income berhasil ditambahkan');
     }
 
+    // Masih versi javascript
     public function update(Request $request, $id)
     {
         $income = Income::findOrFail($id);
@@ -100,6 +99,6 @@ class IncomeController extends Controller
             );
         });
 
-        return response()->json(['message' => 'Income berhasil dihapus']);
+        return redirect()->back()->with('success', 'Income berhasil dihapus');
     }
 }

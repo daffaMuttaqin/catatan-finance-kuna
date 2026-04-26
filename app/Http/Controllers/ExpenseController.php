@@ -12,19 +12,17 @@ class ExpenseController extends Controller
     {
         $query = Expense::query();
 
-        // Search
         if ($request->search) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // Filter tanggal
         if ($request->start_date && $request->end_date) {
             $query->whereBetween('date', [$request->start_date, $request->end_date]);
         }
 
         $expenses = $query->latest()->get();
 
-        return response()->json($expenses);
+        return view('expense', compact('expenses'));
     }
 
     public function store(Request $request)
@@ -33,6 +31,7 @@ class ExpenseController extends Controller
             'date' => 'required|date',
             'name' => 'required',
             'category' => 'required',
+            'price' => 'required|numeric|min:0',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -41,8 +40,8 @@ class ExpenseController extends Controller
                 'date' => $request->date,
                 'name' => $request->name,
                 'size' => $request->size,
-                'quantity' => $request->quantity,
                 'category' => $request->category,
+                'price' => $request->price,
                 'bank_account' => $request->bank_account,
                 'notes' => $request->notes,
                 'created_by' => auth()->id(),
@@ -55,7 +54,7 @@ class ExpenseController extends Controller
             );
         });
 
-        return response()->json(['message' => 'Expense berhasil ditambahkan']);
+        return redirect()->back()->with('success', 'Expense berhasil ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -98,6 +97,6 @@ class ExpenseController extends Controller
             );
         });
 
-        return response()->json(['message' => 'Expense berhasil dihapus']);
+        return redirect()->back()->with('success', 'Expense berhasil dihapus');
     }
 }
